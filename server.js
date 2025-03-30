@@ -7,7 +7,11 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
-
+app.use(cors({
+origin: ["https://riddevs.github.io/Internal/upload.html"], // Replace with your actual GitHub Pages URL
+methods: ["POST"],
+allowedHeaders: ["Content-Type"]
+}));
 const upload = multer({ dest: "uploads/" });
 
 const SKILLS_LIST = [
