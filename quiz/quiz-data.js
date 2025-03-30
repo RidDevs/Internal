@@ -1,4 +1,3 @@
-// Mock quiz data with questions for each subject
 const quizData = {
     "Python": [
       {
