@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Recruitment App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Navigation Bar -->
+      <header class="navbar">
+        <div class="logo">AI Recruit</div>
+        <div class="search-container">
+          <input type="search" placeholder="Search candidates..." class="search-input" />
+        </div>
+        <div class="nav-actions">
+          <button class="icon-button">📣</button>
+          <div class="avatar">HR</div>
+        </div>
+      </header>
+
+      <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <button class="primary-button">+ Add New Job</button>
+          <nav class="sidebar-nav">
+            <a href="#" class="sidebar-link active">📊 Dashboard</a>
+            <a href="#" class="sidebar-link">👥 Candidates</a>
+            <a href="#" class="sidebar-link">💼 Jobs</a>
+            <a href="#" class="sidebar-link">📄 Resumes</a>
+            <a href="#" class="sidebar-link">📈 Analytics</a>
+          </nav>
+          <div class="sidebar-footer">
+            <a href="#" class="sidebar-link">⚙️ Settings</a>
+            <a href="#" class="sidebar-link">❓ Help</a>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="content">
+          <div class="page-header">
+            <h1>Recruitment Dashboard</h1>
+            <div class="header-actions">
+              <button class="secondary-button">Export Report</button>
+              <button class="primary-button">AI Candidate Matching</button>
+            </div>
+          </div>
+
+          <!-- Stats Cards -->
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-content">
+                <p class="stat-label">Total Candidates</p>
+                <h3 class="stat-value">1,248</h3>
+                <p class="stat-change up">↑ 12% from last month</p>
+              </div>
+              <div class="stat-icon">👥</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-content">
+                <p class="stat-label">Open Jobs</p>
+                <h3 class="stat-value">24</h3>
+                <p class="stat-change up">↑ 3 new this week</p>
+              </div>
+              <div class="stat-icon">💼</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-content">
+                <p class="stat-label">Resumes Processed</p>
+                <h3 class="stat-value">854</h3>
+                <p class="stat-change up">↑ 142 this week</p>
+              </div>
+              <div class="stat-icon">📄</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-content">
+                <p class="stat-label">Time-to-Hire (Avg)</p>
+                <h3 class="stat-value">18 days</h3>
+                <p class="stat-change down">↓ 3 days since last quarter</p>
+              </div>
+              <div class="stat-icon">✓</div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('dashboard')">Dashboard</button>
+            <button class="tab-button" onclick="switchTab('ai-tools')">AI Tools</button>
+          </div>
+
+          <!-- Tab Content: Dashboard -->
+          <div id="dashboard-content" class="tab-content active">
+            <div class="dashboard-grid">
+              <!-- Candidates Section -->
+              <div class="grid-section candidates-section">
+                <div class="section-header">
+                  <h2>Top Matching Candidates</h2>
+                  <a href="#" class="view-all">View All</a>
+                </div>
+                <div class="candidates-grid">
+                  <div class="candidate-card">
+                    <div class="candidate-info">
+                      <div class="candidate-avatar">AJ</div>
+                      <div>
+                        <h3>Alexandra Johnson</h3>
+                        <p>Senior Software Engineer</p>
+                      </div>
+                      <div class="match-score high">92% Match</div>
+                    </div>
+                    <div class="candidate-skills">
+                      <span class="skill-tag">React</span>
+                      <span class="skill-tag">TypeScript</span>
+                      <span class="skill-tag">Node.js</span>
+                      <span class="skill-tag">+2 more</span>
+                    </div>
+                  </div>
+                  <div class="candidate-card">
+                    <div class="candidate-info">
+                      <div class="candidate-avatar">MC</div>
+                      <div>
+                        <h3>Michael Chen</h3>
+                        <p>Product Manager</p>
+                      </div>
+                      <div class="match-score high">85% Match</div>
+                    </div>
+                    <div class="candidate-skills">
+                      <span class="skill-tag">Product Strategy</span>
+                      <span class="skill-tag">Agile</span>
+                      <span class="skill-tag">+2 more</span>
+                    </div>
+                    <div class="candidate-flags">
+                      <p>AI Flags: Experience gap: 3 months</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Jobs Section -->
+              <div class="grid-section jobs-section">
+                <div class="section-header">
+                  <h2>Active Jobs</h2>
+                  <span>4 active jobs</span>
+                </div>
+                <div class="jobs-list">
+                  <div class="job-item">
+                    <div class="job-header">
+                      <h3>Senior Software Engineer</h3>
+                      <span class="job-applicants">45 applicants</span>
+                    </div>
+                    <p class="job-department">Engineering</p>
+                    <div class="job-progress">
+                      <div class="progress-bar" style="width: 27%"></div>
+                      <span class="progress-text">12/45</span>
+                    </div>
+                  </div>
+                  <div class="job-item">
+                    <div class="job-header">
+                      <h3>Product Manager</h3>
+                      <span class="job-applicants">32 applicants</span>
+                    </div>
+                    <p class="job-department">Product</p>
+                    <div class="job-progress">
+                      <div class="progress-bar" style="width: 25%"></div>
+                      <span class="progress-text">8/32</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right sidebar -->
+              <div class="grid-sidebar">
+                <!-- Activities Section -->
+                <div class="sidebar-section activities-section">
+                  <h3>Recent Activities</h3>
+                  <div class="activities-list">
+                    <div class="activity-item">
+                      <div class="activity-avatar">ET</div>
+                      <div class="activity-content">
+                        <p><strong>Emma Thompson</strong> shortlisted <strong>Alexandra Johnson for Senior Engineer</strong></p>
+                        <p class="activity-time">2 hours ago</p>
+                      </div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-avatar">DS</div>
+                      <div class="activity-content">
+                        <p><strong>Daniel Smith</strong> added a new job posting for <strong>Product Designer</strong></p>
+                        <p class="activity-time">4 hours ago</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bias Detection Section -->
+                <div class="sidebar-section bias-section">
+                  <div class="section-header">
+                    <h3>Bias Detection</h3>
+                    <button class="text-button">View Details</button>
+                  </div>
+                  <div class="overall-score">
+                    <div class="score-header">
+                      <span>Overall Fairness Score</span>
+                      <span class="score-value">82%</span>
+                    </div>
+                    <div class="score-bar">
+                      <div class="score-progress" style="width: 82%"></div>
+                    </div>
+                  </div>
+                  <div class="bias-metrics">
+                    <div class="bias-metric">
+                      <span class="metric-icon good">✓</span>
+                      <div class="metric-content">
+                        <div class="metric-header">
+                          <span>Gender Balance</span>
+                          <span class="metric-score good">92%</span>
+                        </div>
+                        <div class="metric-bar">
+                          <div class="metric-progress good" style="width: 92%"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bias-metric">
+                      <span class="metric-icon warning">!</span>
+                      <div class="metric-content">
+                        <div class="metric-header">
+                          <span>Age Distribution</span>
+                          <span class="metric-score warning">78%</span>
+                        </div>
+                        <div class="metric-bar">
+                          <div class="metric-progress warning" style="width: 78%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content: AI Tools -->
+          <div id="ai-tools-content" class="tab-content">
+            <div class="tools-grid">
+              <div class="tool-card">
+                <h3>Resume Parser</h3>
+                <p>Upload resumes and our AI will extract key information, skills, and experience automatically.</p>
+                <div class="upload-area">
+                  <p>Drag & drop files here or</p>
+                  <button class="secondary-button">Browse Files</button>
+                </div>
+              </div>
+              <div class="tool-card">
+                <h3>AI Matching Engine</h3>
+                <p>Our AI can analyze your job requirements and match them with candidate profiles, identifying the best fits while minimizing unconscious bias.</p>
+                <button class="primary-button">Match Candidates</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
