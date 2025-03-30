@@ -5,18 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Analyzer</title>
     <link rel="stylesheet" href="styleHome.css">
+    <style>
+        /* Add some basic styling for the navigation bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="logo">Resume Analyzer</div>
+        <div class="nav-links">
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+        </div>
+    </nav>
+
     <div class="container">
         <h1 class="title">Resume Analyzer</h1>
-        
+
         <div class="buttons">
             <a href="dashboard.html"><button class="btn">Dashboard</button></a>
             <a href="upload.html"><button class="btn">Upload Resume</button></a>
             <a href="quiz/quizindex.html"><button class="btn">Take a Test</button></a>
         </div>
-        
-        
+
         <h2 class="subtitle">Our Hiring Partners</h2>
         <div class="companies" id="companies"></div>
     </div>
