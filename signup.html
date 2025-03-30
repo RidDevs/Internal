@@ -15,6 +15,22 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-image: url('background2.png'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(6px); /* Adjust the blur intensity */
+            z-index: 1;
         }
 
         .signup-container {
@@ -23,10 +39,12 @@
             border-radius: 10px;
             text-align: center;
             width: 350px;
+            position: relative;
+            z-index: 2;
         }
 
         .signup-container h2 {
-            color: #f9a826;
+            color: #f79824;
             margin-bottom: 20px;
         }
 
@@ -39,14 +57,14 @@
         }
 
         .signup-container button {
-            background-color: #f9a826;
+            background-color: #f79824;
             color: #0a1426;
             padding: 15px 30px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
-            width: 120px;
+            width: 100%;
             font-size: 16px;
         }
 
