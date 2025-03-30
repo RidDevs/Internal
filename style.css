@@ -254,7 +254,7 @@ footer {
     color: var(--warning-color);
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
     .container {
         padding: 15px;
