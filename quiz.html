@@ -345,73 +345,74 @@
             // This would replace the fetchQuizQuestions function in your quiz.html file
 
             function fetchQuizQuestions(payload) {
-                // Show loading indicator
-                loadingQuiz.classList.remove('hidden');
-                
-                // Call the backend AI service
-                fetch('http://your-backend-url/api/generate-quiz', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to generate quiz questions');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Process the AI-generated questions
-                    quizQuestions = data.questions;
-                    
-                    // Add self-assessment questions if needed
-                    if (payload.skills.length < 5) {
-                        payload.skills.forEach(skill => {
-                            quizQuestions.push({
-                                question: `How would you rate your proficiency in ${skill}?`,
-                                options: [
-                                    'Expert - I can teach others and solve complex problems',
-                                    'Advanced - I can use it independently for most tasks',
-                                    'Intermediate - I understand the fundamentals but need help sometimes',
-                                    'Beginner - I have basic knowledge but limited experience'
-                                ],
-                                isSelfAssessment: true,
-                                skill: skill
-                            });
-                        });
-                    }
-                    
-                    // Initialize answer array
-                    userAnswers = new Array(quizQuestions.length).fill(null);
-                    
-                    // Hide loading and show quiz
-                    loadingQuiz.classList.add('hidden');
-                    quizContainer.classList.remove('hidden');
-                    prevBtn.classList.remove('hidden');
-                    nextBtn.classList.remove('hidden');
-                    
-                    // Render first question
-                    renderQuestion(0);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    // Fallback to local question generation if API fails
-                    alert('Unable to connect to AI service. Using backup questions instead.');
-                    quizQuestions = simulateAIQuizGeneration(payload.skills);
-                    userAnswers = new Array(quizQuestions.length).fill(null);
-                    
-                    // Hide loading and show quiz
-                    loadingQuiz.classList.add('hidden');
-                    quizContainer.classList.remove('hidden');
-                    prevBtn.classList.remove('hidden');
-                    nextBtn.classList.remove('hidden');
-                    
-                    // Render first question
-                    renderQuestion(0);
+    // Show loading indicator
+    loadingQuiz.classList.remove('hidden');
+    
+    // Call the backend AI service
+    // Replace with your actual Render deployment URL
+    fetch('https://your-gemini-quiz-generator.onrender.com/api/generate-quiz', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to generate quiz questions');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Process the AI-generated questions
+        quizQuestions = data.questions;
+        
+        // Add self-assessment questions if needed
+        if (payload.skills.length < 5) {
+            payload.skills.forEach(skill => {
+                quizQuestions.push({
+                    question: `How would you rate your proficiency in ${skill}?`,
+                    options: [
+                        'Expert - I can teach others and solve complex problems',
+                        'Advanced - I can use it independently for most tasks',
+                        'Intermediate - I understand the fundamentals but need help sometimes',
+                        'Beginner - I have basic knowledge but limited experience'
+                    ],
+                    isSelfAssessment: true,
+                    skill: skill
                 });
-            }
+            });
+        }
+        
+        // Initialize answer array
+        userAnswers = new Array(quizQuestions.length).fill(null);
+        
+        // Hide loading and show quiz
+        loadingQuiz.classList.add('hidden');
+        quizContainer.classList.remove('hidden');
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+        
+        // Render first question
+        renderQuestion(0);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Fallback to local question generation if API fails
+        alert('Unable to connect to AI service. Using backup questions instead.');
+        quizQuestions = simulateAIQuizGeneration(payload.skills);
+        userAnswers = new Array(quizQuestions.length).fill(null);
+        
+        // Hide loading and show quiz
+        loadingQuiz.classList.add('hidden');
+        quizContainer.classList.remove('hidden');
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+        
+        // Render first question
+        renderQuestion(0);
+    });
+}
             
             function simulateAIQuizGeneration(skills) {
                 // This function simulates what an AI service would return
