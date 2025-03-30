@@ -140,7 +140,7 @@
         }
         
         .hidden {
-            display: none;
+            display: none !important;
         }
         
         .loading {
@@ -345,11 +345,11 @@
             // This would replace the fetchQuizQuestions function in your quiz.html file
 
             function fetchQuizQuestions(payload) {
-    // Show loading indicator
+    // Show loading indicator and hide the Start Quiz button
     loadingQuiz.classList.remove('hidden');
+    startQuizBtn.classList.add('hidden');
     
     // Call the backend AI service
-    // Replace with your actual Render deployment URL
     fetch('https://internal-quiz.onrender.com/api/generate-quiz', {
         method: 'POST',
         headers: {
@@ -387,7 +387,7 @@
         // Initialize answer array
         userAnswers = new Array(quizQuestions.length).fill(null);
         
-        // Hide loading and show quiz
+        // IMPORTANT: Make sure to hide loading and show quiz
         loadingQuiz.classList.add('hidden');
         quizContainer.classList.remove('hidden');
         prevBtn.classList.remove('hidden');
@@ -403,7 +403,7 @@
         quizQuestions = simulateAIQuizGeneration(payload.skills);
         userAnswers = new Array(quizQuestions.length).fill(null);
         
-        // Hide loading and show quiz
+        // IMPORTANT: Make sure to hide loading and show quiz here too
         loadingQuiz.classList.add('hidden');
         quizContainer.classList.remove('hidden');
         prevBtn.classList.remove('hidden');
@@ -413,6 +413,7 @@
         renderQuestion(0);
     });
 }
+
             
             function simulateAIQuizGeneration(skills) {
                 // This function simulates what an AI service would return
