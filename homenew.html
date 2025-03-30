@@ -27,10 +27,10 @@
         }
 
         nav a {
-            color: white;
+            color: rgb(169, 103, 9);
             text-decoration: none;
             margin: 0 15px;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: color 0.3s;
         }
@@ -43,15 +43,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0px 40px;
-            margin-top: 20px;
-            height: 100vh;
+            padding: 10px 40px;
+            margin-top: -20px;
+            height: 110vh;
         }
 
         .hero-text {
             max-width: 50%;
             flex: 1;
-            margin-top: -240px;
+            margin-top: -20px;
         }
 
         .hero-text h2 {
@@ -62,15 +62,16 @@
         }
 
         .hero-text p {
-            font-size: 18px;
+            font-size: 26px;
             color: #ccc;
             margin-bottom: 140px;
+            height: 10px;
         }
 
         .features {
             display: flex;
             gap: 20px;
-            margin-top: -100px;
+            margin-top: 200px;
         }
 
         .feature {
@@ -80,7 +81,7 @@
             display: flex;
             align-items: center;
             gap: 1px;
-            font-size: 16px;
+            font-size: 26px;
             transition: background 0.3s, transform 0.3s;
             flex: 1;
         }
@@ -96,13 +97,57 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            top: 20px; 
-            background-image: url('hi.png'); 
+            top: 20px;
+            background-image: url('hi.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             height: 100%;
-            margin-right: 200px; 
+            margin-right: 200px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px;
+            gap: 20px;
+        }
+
+        .upload-section, .info-section {
+            flex: 1;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .upload-section img, .info-section img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .upload-section h3, .info-section h3 {
+            font-size: 24px;
+            color: #f9a826;
+            margin-bottom: 30px;
+        }
+
+        .upload-button, .dashboard-button {
+            background-color: #f9a826;
+            color: #0a1426;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .upload-button:hover, .dashboard-button:hover {
+            background-color: #ffb74d;
+            transform: translateY(-3px);
         }
 
         @keyframes fadeIn {
@@ -123,7 +168,7 @@
             <a href="upload2.html">User Resume upload-(and test)</a>
             <a href="upload.html">Skill Checker</a>
             <a href="dashboard/index.html">HR Dashboard</a>
-            <a href="contact.html">Contact</a>
+            <a href="contact.html">Contact us</a>
             <a href="login.html">Login/Sign-up</a>
         </nav>
     </header>
@@ -131,6 +176,7 @@
         <div class="hero-text">
             <h2>Smart Hiring <br> Starts Here</h2>
             <p>Analyze resumes, assess skills, test yourself and hire the best talent with AI-powered precision.</p>
+
             <div class="features">
                 <div class="feature">
                     <span>📊</span>
@@ -148,6 +194,21 @@
         </div>
         <div class="hero-image"></div>
     </section>
+
+    <div class="container">
+        <section class="upload-section">
+            <img src="upload1.jpg" alt="Upload Icon">
+            <h3>Upload Your Resume</h3>
+            <button class="upload-button" onclick="window.location.href='upload2.html'">User Resume Upload</button>
+        </section>
+
+        <section class="info-section">
+            <img src="dashboard.jpg" alt="Dashboard Icon">
+            <h3>HR Dashboard</h3>
+            <button class="dashboard-button" onclick="window.location.href='dashboard/index.html'">Go to Dashboard</button>
+        </section>
+    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const navLinks = document.querySelectorAll("nav a");
@@ -155,7 +216,7 @@
             navLinks.forEach(link => {
                 link.addEventListener("click", function (event) {
                     event.preventDefault();
-                    alert(You clicked on ${this.textContent});
+                    alert(`You clicked on ${this.textContent}`);
                 });
             });
         });
