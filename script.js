@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function handleSubmit(e) {
+        // Prevent the default form submission to avoid page refresh
         e.preventDefault();
         
         const file = resumeInput.files[0];
