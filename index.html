@@ -3,12 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Resume Skill Extractor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h1>Welcome to the Internal Page</h1>
-    <p>This is a simple HTML page.</p> 
+    <div class="container">
+        <header>
+            <h1>Resume Skill Extractor</h1>
+            <p>Upload your resume and we'll extract the skills automatically</p>
+        </header>
+        
+        <div class="card">
+            <!-- Upload Form -->
+            <form id="uploadForm" class="upload-area">
+                <div id="dropZone" class="drop-zone">
+                    <i class="fas fa-file-upload icon"></i>
+                    <p>Drag & drop your resume PDF here</p>
+                    <p class="or-text">- OR -</p>
+                    <label for="resumeInput" class="browse-btn">Browse Files</label>
+                    <input type="file" id="resumeInput" accept="application/pdf" hidden>
+                    <p id="fileName" class="file-name"></p>
+                </div>
+                <button type="submit" id="submitBtn" class="submit-btn">Upload & Analyze</button>
+            </form>
 
+            <!-- Loading Animation -->
+            <div id="loadingContainer" class="loading-container hidden">
+                <div class="spinner"></div>
+                <p>Analyzing your resume...</p>
+            </div>
+
+            <!-- Skills Output Section -->
+            <div id="skillsContainer" class="skills-container hidden">
+                <h2>Extracted Skills</h2>
+                <div id="skillsTags" class="skills-tags"></div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message hidden"></div>
+        </div>
+        
+        
+    </div>
+
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <i id="toast-icon" class="fas fa-check-circle"></i>
+            <span id="toast-message">Success!</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
