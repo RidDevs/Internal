@@ -258,10 +258,12 @@
             <div class="quiz-controls">
                 <button id="retakeBtn">Retake Quiz</button>
                 <button id="homeBtn">Back to Home</button>
+                <button id="viewDashboardBtn">View Dashboard</button>
             </div>
         </div>
     </div>
 
+    <script src="quizAnalytics.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const skillsSummary = document.getElementById('skillsSummary');
@@ -628,23 +630,43 @@
             });
             
             submitQuizBtn.addEventListener('click', () => {
-                const { score, recommendations } = calculateResults();
-                
-                scoreValue.textContent = score;
+    const { score, recommendations } = calculateResults();
+    
+    scoreValue.textContent = score;
 
-                recommendationsList.innerHTML = '';
-                recommendations.forEach(recommendation => {
-                    const li = document.createElement('li');
-                    li.textContent = recommendation;
-                    recommendationsList.appendChild(li);
-                });
+    recommendationsList.innerHTML = '';
+    recommendations.forEach(recommendation => {
+        const li = document.createElement('li');
+        li.textContent = recommendation;
+        recommendationsList.appendChild(li);
+    });
 
-                quizContainer.classList.add('hidden');
-                prevBtn.classList.add('hidden');
-                nextBtn.classList.add('hidden');
-                submitQuizBtn.classList.add('hidden');
-                results.style.display = 'block';
-            });
+    // Store results in analytics
+    const skillResults = quizQuestions.map((question, index) => {
+        if (question.isSelfAssessment) return null;
+        
+        return {
+            skill: question.skill,
+            question: question.question,
+            isCorrect: userAnswers[index] === question.correctAnswer
+        };
+    }).filter(item => item !== null);
+    
+    if (window.quizAnalytics) {
+        window.quizAnalytics.storeQuizResults({
+            date: new Date().toLocaleString(),
+            score: score,
+            skillResults: skillResults,
+            totalQuestions: skillResults.length
+        });
+    }
+
+    quizContainer.classList.add('hidden');
+    prevBtn.classList.add('hidden');
+    nextBtn.classList.add('hidden');
+    submitQuizBtn.classList.add('hidden');
+    results.style.display = 'block';
+});
             
             retakeBtn.addEventListener('click', () => {
                 userAnswers = new Array(quizQuestions.length).fill(null);
@@ -657,6 +679,10 @@
             
             homeBtn.addEventListener('click', () => {
                 window.location.href = 'homenew.html';
+            });
+
+            document.getElementById('viewDashboardBtn').addEventListener('click', () => {
+            window.location.href = 'dashboard.html';
             });
         });
     </script>
