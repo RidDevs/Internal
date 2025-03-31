@@ -1,9 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
 
-// Firebase Config
+
 const firebaseConfig = {
-    apiKey: "AIzaSyBtRpcHlXxixH52I0BCKOsgtKu34Uefadc", // Replace with your API key
+    apiKey: "AIzaSyBtRpcHlXxixH52I0BCKOsgtKu34Uefadc", 
     authDomain: "hirewise-d9b7d.firebaseapp.com",
     projectId: "hirewise-d9b7d",
     storageBucket: "hirewise-d9b7d.firebasestorage.app",
@@ -20,13 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const profileLink = document.getElementById("profileLink");
 
     function checkAuth(event, redirectUrl) {
-        event.preventDefault(); // Prevent default link behavior
+        event.preventDefault(); 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in, allow navigation
                 window.location.href = redirectUrl;
-            } else {
-                // User is signed out, redirect to login
+            } else {     
                 alert("Please login to access this page.");
                 window.location.href = "login.html";
             }
@@ -41,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         checkAuth(event, "profile.html");
     });
 
-    // Check auth on page load of sub-pages.
     if(window.location.pathname.includes('dashboard.html') || window.location.pathname.includes('profile.html')){
       onAuthStateChanged(auth, (user) => {
         if (!user) {

@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <style>/
-        body {
+    <style>
+        .body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
         }
-        
-        /* Navbar */
+
         .navbar {
             background-color: #007bff;
             padding: 15px;
@@ -133,7 +132,7 @@
     <div class="contact-container">
         <h1>Contact Us</h1>
         <p>If you have any questions,and feedback feel free to reach out!</p>
-        <h2>Contact Email: HireWise.ai@gmail.com</h2>
+        <h2>Contact Email: </h2>
 
         <form class="contact-form" onsubmit="sendEmail(event)">
             <label for="name">Your Name:</label>
@@ -161,7 +160,7 @@
 
     <script>
         (function() {
-            emailjs.init("OM0lJ5m264st9nSfD"); // Replace with your EmailJS User ID
+            emailjs.init("OM0lJ5m264st9nSfD"); 
         })();
 
         function sendEmail(event) {

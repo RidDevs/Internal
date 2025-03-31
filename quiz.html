@@ -221,12 +221,12 @@
             <p><i class="fas fa-info-circle"></i> This quiz is generated based on the skills detected in your resume. Answer the questions to assess your proficiency level.</p>
         </div>
         
-        <!-- Skills Summary Section (Initially Shown) -->
+    
         <div id="skillsSummary" class="skills-summary">
             <h2>Detected Skills</h2>
             <p>The following skills were identified from your resume:</p>
             <div id="skillsList" class="skills-list">
-                <!-- Skills will be added here dynamically -->
+      
             </div>
         </div>
         
@@ -236,7 +236,7 @@
         </div>
         
         <div id="quizContainer" class="hidden">
-            <!-- Questions will be dynamically inserted here -->
+    
         </div>
         
         <div class="quiz-controls">
@@ -252,7 +252,7 @@
             <div class="skill-recommendations">
                 <h3>Skill Recommendations:</h3>
                 <ul id="recommendationsList">
-                    <!-- Recommendations will be added here -->
+
                 </ul>
             </div>
             <div class="quiz-controls">
@@ -282,27 +282,24 @@
             let userAnswers = [];
             let quizQuestions = [];
             
-            // Get skills data from localStorage
             const skills = JSON.parse(localStorage.getItem('quizSkills') || '[]');
             
             if (skills.length === 0) {
-                // No skills found, redirect back to upload page
+
                 alert('No skills data found. Please upload your resume first.');
                 window.location.href = 'index.html';
                 return;
             }
             
-            // Display extracted skills
             displaySkills(skills);
-            
-            // Start quiz button
+
             startQuizBtn.addEventListener('click', function() {
-                // Hide skills summary and show loading
+
                 skillsSummary.classList.add('hidden');
                 startQuizBtn.classList.add('hidden');
                 loadingQuiz.classList.remove('hidden');
                 
-                // Generate quiz questions based on skills
+
                 generateQuizWithAI(skills);
             });
             
@@ -329,27 +326,26 @@
             }
             
             function generateQuizWithAI(skills) {
-                // In a real application, this would be an API call to an AI service
-                // Here we'll simulate it with a timeout and then call our API
+
                 
-                // Prepare the API request payload
+
                 const payload = {
                     skills: skills,
-                    questionCount: Math.min(skills.length * 2, 10) // 2 questions per skill, max 10
+                    questionCount: Math.min(skills.length * 2, 10) 
                 };
                 
-                // Call to the AI quiz generation API
+
                 fetchQuizQuestions(payload);
             }
             
-            // This would replace the fetchQuizQuestions function in your quiz.html file
+
 
             function fetchQuizQuestions(payload) {
-    // Show loading indicator and hide the Start Quiz button
+
     loadingQuiz.classList.remove('hidden');
     startQuizBtn.classList.add('hidden');
     
-    // Call the backend AI service
+
     fetch('https://internal-quiz.onrender.com/api/generate-quiz', {
         method: 'POST',
         headers: {
@@ -364,10 +360,10 @@
         return response.json();
     })
     .then(data => {
-        // Process the AI-generated questions
+
         quizQuestions = data.questions;
         
-        // Add self-assessment questions if needed
+
         if (payload.skills.length < 5) {
             payload.skills.forEach(skill => {
                 quizQuestions.push({
@@ -384,49 +380,41 @@
             });
         }
         
-        // Initialize answer array
         userAnswers = new Array(quizQuestions.length).fill(null);
         
-        // IMPORTANT: Make sure to hide loading and show quiz
         loadingQuiz.classList.add('hidden');
         quizContainer.classList.remove('hidden');
         prevBtn.classList.remove('hidden');
         nextBtn.classList.remove('hidden');
-        
-        // Render first question
+
         renderQuestion(0);
     })
     .catch(error => {
         console.error('Error:', error);
-        // Fallback to local question generation if API fails
+
         alert('Unable to connect to AI service. Using backup questions instead.');
         quizQuestions = simulateAIQuizGeneration(payload.skills);
         userAnswers = new Array(quizQuestions.length).fill(null);
-        
-        // IMPORTANT: Make sure to hide loading and show quiz here too
+
         loadingQuiz.classList.add('hidden');
         quizContainer.classList.remove('hidden');
         prevBtn.classList.remove('hidden');
         nextBtn.classList.remove('hidden');
-        
-        // Render first question
+
         renderQuestion(0);
     });
 }
 
             
             function simulateAIQuizGeneration(skills) {
-                // This function simulates what an AI service would return
-                // In a real app, this entire function would be replaced by your AI API call
                 
                 const questions = [];
                 
                 skills.forEach(skill => {
-                    // Create knowledge question
+
                     const questionData = getAIGeneratedQuestion(skill);
                     questions.push(questionData);
-                    
-                    // Add a self-assessment question if needed
+
                     if (skills.length < 5) {
                         questions.push({
                             question: `How would you rate your proficiency in ${skill}?`,
@@ -446,8 +434,6 @@
             }
             
             function getAIGeneratedQuestion(skill) {
-                // This simulates AI-generated questions for different skills
-                // In a real app, this would come from your AI API
                 
                 const skillQuestions = {
                     'JavaScript': {
@@ -518,7 +504,6 @@
                     }
                 };
                 
-                // Return the predefined question or generate a generic one if not found
                 return skillQuestions[skill] || generateGenericQuestion(skill);
             }
             
@@ -542,12 +527,11 @@
                 currentQuestion = index;
                 const question = quizQuestions[index];
                 
-                // Update navigation buttons
+
                 prevBtn.disabled = index === 0;
                 nextBtn.classList.toggle('hidden', index === quizQuestions.length - 1);
                 submitQuizBtn.classList.toggle('hidden', index !== quizQuestions.length - 1);
                 
-                // Create question HTML
                 let html = `
                     <div class="question-container">
                         <div class="question-number">Question ${index + 1} of ${quizQuestions.length}</div>
@@ -555,7 +539,6 @@
                         <div class="options">
                 `;
                 
-                // Add options
                 question.options.forEach((option, i) => {
                     const selectedClass = userAnswers[index] === i ? 'selected' : '';
                     html += `<div class="option ${selectedClass}" data-index="${i}">${option}</div>`;
@@ -565,13 +548,11 @@
                 
                 quizContainer.innerHTML = html;
                 
-                // Add event listeners to options
                 document.querySelectorAll('.option').forEach(option => {
                     option.addEventListener('click', function() {
                         const optionIndex = parseInt(this.getAttribute('data-index'));
                         userAnswers[currentQuestion] = optionIndex;
                         
-                        // Update selected class
                         document.querySelectorAll('.option').forEach(opt => {
                             opt.classList.remove('selected');
                         });
@@ -585,21 +566,20 @@
                 const skillAssessment = {};
                 
                 quizQuestions.forEach((question, index) => {
-                    // Skip self-assessment questions in scoring
+
                     if (question.isSelfAssessment) {
-                        // Store self-assessment rating
-                        const rating = userAnswers[index] !== null ? userAnswers[index] : 3; // Default to beginner if unanswered
+
+                        const rating = userAnswers[index] !== null ? userAnswers[index] : 3; 
                         skillAssessment[question.skill] = {
                             ...skillAssessment[question.skill],
                             selfRating: rating
                         };
                     } else {
-                        // Score knowledge questions
+
                         if (userAnswers[index] === question.correctAnswer) {
                             correctAnswers++;
                         }
                         
-                        // Initialize or update skill assessment
                         skillAssessment[question.skill] = {
                             ...skillAssessment[question.skill],
                             correct: userAnswers[index] === question.correctAnswer
@@ -607,13 +587,11 @@
                     }
                 });
                 
-                // Calculate overall score as percentage
                 const knowledgeQuestions = quizQuestions.filter(q => !q.isSelfAssessment);
                 const score = knowledgeQuestions.length > 0 
                     ? Math.round((correctAnswers / knowledgeQuestions.length) * 100) 
-                    : 100; // If only self-assessment questions
-                
-                // Generate recommendations
+                    : 100; 
+
                 const recommendations = generateRecommendations(skillAssessment);
                 
                 return { score, recommendations };
@@ -634,7 +612,6 @@
                     }
                 }
                 
-                // Add a generic recommendation if none were generated
                 if (recommendations.length === 0) {
                     recommendations.push(`Continue developing your skills through practice and advanced learning.`);
                 }
@@ -642,7 +619,6 @@
                 return recommendations;
             }
             
-            // Navigation event listeners
             prevBtn.addEventListener('click', () => {
                 renderQuestion(currentQuestion - 1);
             });
@@ -654,18 +630,15 @@
             submitQuizBtn.addEventListener('click', () => {
                 const { score, recommendations } = calculateResults();
                 
-                // Display score
                 scoreValue.textContent = score;
-                
-                // Display recommendations
+
                 recommendationsList.innerHTML = '';
                 recommendations.forEach(recommendation => {
                     const li = document.createElement('li');
                     li.textContent = recommendation;
                     recommendationsList.appendChild(li);
                 });
-                
-                // Show results
+
                 quizContainer.classList.add('hidden');
                 prevBtn.classList.add('hidden');
                 nextBtn.classList.add('hidden');
@@ -683,7 +656,7 @@
             });
             
             homeBtn.addEventListener('click', () => {
-                window.location.href = 'index.html';
+                window.location.href = 'homenew.html';
             });
         });
     </script>

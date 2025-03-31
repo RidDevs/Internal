@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+        localStorage.removeItem('skillsData');
     const dropZone = document.getElementById('dropZone');
     const resumeInput = document.getElementById('resumeInput');
     const fileName = document.getElementById('fileName');
@@ -98,10 +99,10 @@ document.addEventListener('DOMContentLoaded', function() {
             displaySkills(data.skills);
             showToast('Resume analyzed successfully!', 'success');
             
-            // Add a slight delay before redirecting to the quiz page
+       
             setTimeout(() => {
                 openQuizPage(data.skills);
-            }, 1500); // 1.5 second delay to show the success toast
+            }, 1500);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -113,12 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to open the quiz page with skills data
     function openQuizPage(skills) {
-        // Save skills to localStorage for access on the quiz page
         localStorage.setItem('quizSkills', JSON.stringify(skills));
         
-        // Redirect to the quiz page
         window.location.href = 'quiz.html';
     }
 
